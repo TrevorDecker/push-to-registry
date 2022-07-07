@@ -10,7 +10,7 @@ on:
 env:
     IMAGE_NAME: ptr-test
     IMAGE_TAGS: v1 ${{ github.sha }}
-    IMAGE_REGISTRY: ghcr.io/"${{ github.repository_owner.lowercase }}"
+    IMAGE_REGISTRY=$(echo 'console.log("ghcr.io/"+"${{ github.repository }}".toLowerCase())' | node -)
     REGISTRY_USER: ${{ github.actor }}
     REGISTRY_PASSWORD: ${{ github.token }}
 
