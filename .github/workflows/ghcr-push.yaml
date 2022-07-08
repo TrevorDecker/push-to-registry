@@ -10,7 +10,7 @@ on:
 env:
     IMAGE_NAME: ptr-test
     IMAGE_TAGS: v1 ${{ github.sha }}
-    IMAGE_REGISTRY: ghcr.io/$(echo ${{ github.repository_owner }} |tr '[:upper:]' '[:lower:]')
+    IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
     REGISTRY_USER: ${{ github.actor }}
     REGISTRY_PASSWORD: ${{ github.token }}
     
@@ -55,7 +55,7 @@ jobs:
         with:
           image: ${{ steps.build_image.outputs.image }}
           tags: ${{ steps.build_image.outputs.tags }}
-          registry: ${{ env.IMAGE_REGISTRY }}
+          registry: $(echo ${{env.IMAGE_REGISTRY}} |tr '[:upper:]' '[:lower:]')
           username: ${{ env.REGISTRY_USER }}
           password: ${{ env.REGISTRY_PASSWORD }}
           extra-args: |
